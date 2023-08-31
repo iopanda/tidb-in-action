@@ -2,7 +2,7 @@
 相比于行存，TiFlash 根据强 Schema 按列式存储结构化数据，借助 ClickHouse 的向量化计算引擎，带来读取和计算双重性能优势。相较于普通列存，TiFlash 则具有实时更新、分布式自动扩展、SI（Snapshot Isolation）隔离级别读取等优势。本章节将从架构和原理的角度来解读 TiFlash。
 
 ### 9.2.1 基本架构
-![1.png](/res/session1/chapter9/tiflash-architecture/1.png)
+![1.png](res/session1/chapter9/tiflash-architecture/1.png)
 
 TiFlash 引擎补全了 TiDB 在 OLAP 方面的短板。TiDB 可通过计算层的优化器分析，或者显式指定等方式，将部分运算下推到对应的引擎，达到速度的提升。值得一提的是，在表关联场景下，即便 TiFlash 架构没有 MPP 相关功能，借助 TiDB 的查询优化器、布隆过滤器下推和表广播等手段，相当比例的关联场景仍可享受 TiFlash 加速。
 
@@ -11,14 +11,14 @@ TiFlash 引擎补全了 TiDB 在 OLAP 方面的短板。TiDB 可通过计算层�
 在 TiDB 的体系中，每个 Table 含有 Schema、Index（索引）、Record（实际的行数据） 等内容。由于 TiKV 本身没有 Table 的概念，TiDB 需要将 Table 数据按照 Schema 编码为 Key-Value 的形式后写入相应 Region，通过 Multi-Raft 协议同步到 TiFlash，再由 TiFlash 根据 Schema 进行解码拆列和持久化等操作。
 
 ### 9.2.2 原理
-![2.png](/res/session1/chapter9/tiflash-architecture/2.png)
+![2.png](res/session1/chapter9/tiflash-architecture/2.png)
 
 这是一张 TiFlash 数据同步到读取的基本流程架构图，以下将按照大类模块分别简单介绍。
 
 #### 1. Replica Manager
 Index 这种主要面向点查的结构对于 TiFlash 的列式存储是没有意义的。为了避免同步冗余数据并实现按 Table 动态增删 TiFlash 列存副本，需要借助 PD 来有选择地同步 Region。
 
-![3.png](/res/session1/chapter9/tiflash-architecture/3.png)
+![3.png](res/session1/chapter9/tiflash-architecture/3.png)
 
 在同一个集群内的 TiFlash 节点会利用 PD 的 ETCD  选举并维护一个 Replica Manager 来负责与 PD 和 TiDB 交互。当感知到 TiDB 对于 TiFlash 副本的操作后（DDL 语句），会将其转化为 PD 的 Placement Rule，通过 PD 令 TiKV 分裂出指定 Key 范围的 Region，为其添加 Learner Peer 并调度到集群中的 TiFlash 节点。此外，当 Table 的 TiFlash 副本尚未可用时，Replica Manager 还负责向各个 TiFlash 节点收集 Table 的数据同步进度并上报给 TiDB。
 
@@ -33,7 +33,7 @@ TiDB 的事务实现是基于 Percolator 模型的，映射到 TiKV 中则是对
 每个 TiFlash 节点都会实时同步 TiDB 的最新的表 Schema 信息。TiFlash 兼容 TiDB 体系的在线 DDL，对经常需要做表结构修改的业务非常友好，例如增、删、改字段等操作都不影响在线业务。
 
 #### 4. Learner Read / Coprocessor
-![4.png](/res/session1/chapter9/tiflash-architecture/4.png)
+![4.png](res/session1/chapter9/tiflash-architecture/4.png)
 
 无论是通过 CH 客户端、TiSpark、CHSpark 还是 TiDB 向 TiFlash 发起查询，都需要 Learner Read 来确保外部一致性。在同一个 Raft Group 中，Index 是永续递增的（任何 Raft 命令都会对其产生修改），可被视作乐观锁。Region 本身含有 Version 和 Conf Version 两种版本号，当发生诸如 Split/Merge/ChangePeer 等操作时，版本号均会产生相应的变化。
 

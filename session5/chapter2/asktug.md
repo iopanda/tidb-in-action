@@ -7,7 +7,7 @@
 
 自上线以来，AskTUG 逐渐吸引了越来越多用户的关注，截止 2019 年 2 月底，AskTUG 已有 1500+ 注册用户，沉淀了 1300+ 问题和100+ 技术文章，已是一个日回复数 100+ 的活跃网站。
 
-![AskTUG Webpage](/res/session5/chapter2/asktug/webpage.png)
+![AskTUG Webpage](res/session5/chapter2/asktug/webpage.png)
 
 ### 2.7.2 AskTUG 内容简介
 

@@ -17,7 +17,7 @@ TiDB 产品的每一次微小进步都离不开社区小伙伴的支持和帮助
 ### 2.4.2 第一季：性能
 
 
-![Performance Challenge Program](/res/session5/chapter2/challenge-prigram/performanc-challenge-program.jpeg)
+![Performance Challenge Program](res/session5/chapter2/challenge-prigram/performanc-challenge-program.jpeg)
 
 性能挑战赛的官网地址为：[TiDB Performance Challenge](https://pingcap.com/community-cn/tidb-performance-challenge/)。本次比赛奖项设置为：一等奖 1 名，二等奖 2 名，三等奖 3 名，其余分数高于 600 分的团队或个人为优秀奖，各团队和个人的获奖情况如下：
 * 一等奖：.\* Team（15050 积分）。
@@ -32,7 +32,7 @@ TiDB 产品的每一次微小进步都离不开社区小伙伴的支持和帮助
 ### 2.4.3 第二季：易用性
 
 
-![Usaribility Challenge Program](/res/session5/chapter2/challenge-prigram/usaribility-challenge-program.svg)
+![Usaribility Challenge Program](res/session5/chapter2/challenge-prigram/usaribility-challenge-program.svg)
 
 作为 TiDB Challenge Program 系列的第二赛季，这一季将聚焦 TiDB 易用性。在书写本书的同事，第二季正在如火如荼的进行。第二季官网地址：[TiDB Usability Challenge](https://pingcap.com/community-cn/tidb-usability-challenge/)
 

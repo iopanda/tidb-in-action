@@ -34,16 +34,16 @@ curl -X POST -d '{"metric-storage":"http://127.0.0.1:9090"}' http://127.0.0.1:23
 
 点击完整报告的链接即可查看报告内容。
 
-![生成诊断报告步骤](/res/session3/chapter2/diagnosis-report/report-doc1.png)
+![生成诊断报告步骤](res/session3/chapter2/diagnosis-report/report-doc1.png)
 
-![生成诊断报告结果](/res/session3/chapter2/diagnosis-report/report-doc2.png)
+![生成诊断报告结果](res/session3/chapter2/diagnosis-report/report-doc2.png)
 
 
 ### 4. 生成对比诊断报告
 
 对比两个诊断时间段的报告，要求 2 个时间段的跨度一样，比如 start 和 end 的时间差均为 10 分钟。
 
-![生成对比诊断报告步骤](/res/session3/chapter2/diagnosis-report/report-doc3.png)
+![生成对比诊断报告步骤](res/session3/chapter2/diagnosis-report/report-doc3.png)
 
 
 ### 5. 提示
@@ -51,7 +51,7 @@ curl -X POST -d '{"metric-storage":"http://127.0.0.1:9090"}' http://127.0.0.1:23
 - i 图标：鼠标移动到 i 图标会显示每一行的说明注释。
 - expand：点击 expand 展开会看到这项监控更加详细的信息，例如是哪个 instance, 哪个 label 等等。
 
-![图标](/res/session3/chapter2/diagnosis-report/report-doc4.png)
+![图标](res/session3/chapter2/diagnosis-report/report-doc4.png)
 
 
 ## 2.3.2 自动诊断报告

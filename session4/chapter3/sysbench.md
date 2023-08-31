@@ -149,7 +149,7 @@ sysbench --config-file=sysbench-thread-16.cfg oltp_read_write --tables=32 --tabl
 | point_select | 2048 | 663217.00 | 663217.00 | 0.29 | 3.08 | 8.90  | 330.19 |
 | point_select | 4096 | 736094.00 | 736094.00 | 0.33 | 5.55 | 15.00 | 431.72 |
 
-![oltp_point_select.png](/res/session4/chapter3/sysbench/oltp_point_select.png)
+![oltp_point_select.png](res/session4/chapter3/sysbench/oltp_point_select.png)
 
 * read_only
 
@@ -162,7 +162,7 @@ sysbench --config-file=sysbench-thread-16.cfg oltp_read_write --tables=32 --tabl
 | read_only | 1024   | 17691.40   | 283063.00   | 10.87   | 57.73   | 87.56   | 378.12   |
 | read_only | 2048   | 19086.60   | 305386.00   | 7.68   | 107.12   | 164.45   | 710.91   |
 
-![oltp_read_only.png](/res/session4/chapter3/sysbench/oltp_read_only.png)
+![oltp_read_only.png](res/session4/chapter3/sysbench/oltp_read_only.png)
 
 * oltp_update_index
 
@@ -175,7 +175,7 @@ sysbench --config-file=sysbench-thread-16.cfg oltp_read_write --tables=32 --tabl
 | update_index   | 1024   | 40731.20   | 40731.20   | 1.74   | 25.12   | 52.89   | 7395.50   |
 | update_index   | 2048   | 44423.50   | 44423.50   | 1.77   | 46.04   | 99.33   | 5563.36   |
 
-![oltp_update_index.png](/res/session4/chapter3/sysbench/oltp_update_index.png)
+![oltp_update_index.png](res/session4/chapter3/sysbench/oltp_update_index.png)
 
 * write_only
 
@@ -188,7 +188,7 @@ sysbench --config-file=sysbench-thread-16.cfg oltp_read_write --tables=32 --tabl
 | write_only   | 1024   | 14761.20   | 88567.40   | 3.30   | 68.39   | 118.92   | 5426.65   |
 | write_only   | 2048   | 16825.20   | 100951.00   | 3.25   | 121.50   | 223.34   | 5551.31   |
 
-![oltp_write_only.png](/res/session4/chapter3/sysbench/oltp_write_only.png)
+![oltp_write_only.png](res/session4/chapter3/sysbench/oltp_write_only.png)
 
 * read_write
 
@@ -201,7 +201,7 @@ sysbench --config-file=sysbench-thread-16.cfg oltp_read_write --tables=32 --tabl
 | read_write   | 1024   | 7260.19   | 145204.00   | 13.25   | 140.67   | 196.89   | 5767.52   |
 | read_write   | 2048   | 8228.84   | 164577.00   | 13.96   | 248.19   | 376.49   | 5475.98   |
 
-![oltp_read_write.png](/res/session4/chapter3/sysbench/oltp_read_write.png)
+![oltp_read_write.png](res/session4/chapter3/sysbench/oltp_read_write.png)
 
 # 3.1.3 总结
 由于 TiDB 与 MySQL 在体系架构上的差别非常大，很多方面都很难找到一个共同的基准点，所以大家不要消耗过多精力在这类基准测试上，应该更多关注 TiDB 和 MySQL 在应用程序使用场景上的区别。MySQL 读扩容可以通过添加从库进行扩展，但单节点写入不具备扩展能力只能通过分库分表，而分库分表会增加开发维护方面成本。TiDB 不管是读流量还是写流量都可以通过添加节点的方式进行快速方便的扩展。

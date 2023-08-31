@@ -45,7 +45,7 @@ TiKV 底层使用 RocksDB 存储引擎，TiKV 中处理 Query 相关的所有 KV
 4. 通过 Index Block 二分查定位 key 所在的 Block（一个 SST 文件中包含多个 Block ）
 
 5. 在 Data Block 中二分查找，找到对应的 value
-![point-lookup](/res/session3/chapter4/read-write-metrics/1.png)
+![point-lookup](res/session3/chapter4/read-write-metrics/1.png)
 
 #### Range-lookup: Iterator
 
@@ -54,7 +54,7 @@ Iterator 是一个归并迭代器，是一个包含多个子 Iterator 的树结�
 1. MemTable（Mutable / Immutable）
 
 2. Block (Index Block / Data Block)，RocksDB 使用 TwoLevelIterator 读取 SST File，其中使用 first_level_iter 读取 Index Block，使用 second_level_iter 读取 Data Block
-![range-lookup](/res/session3/chapter4/read-write-metrics/2.png)
+![range-lookup](res/session3/chapter4/read-write-metrics/2.png)
 
 通过上面内容可以发现，不管是 Point-lookup 还是 Range-lookup 都需要读取 SST File 中的 Data Block（对于 point get, 如果在 Memtable 中找到了对应值，就可以直接返回。不需要再往下扫 SST 了），如果每一个 KV 请求都需要通过 IO 从 SST File 的 Data Block 中读取数据，整个系统肯定会因为 IO 而出现瓶颈，所以 RocksDB 中有 Block Cache 在内存中缓存数据。有了以上预备知识之后，就可以来分析在读取 Key-Value 的过程中使用的系统资源，以及查看对应资源的监控信息。以上过程中主要包含：
 
@@ -184,7 +184,7 @@ Coprocessor 内部细节较多，下面进行一个简化的描述：
 
     a. Executor.Open()： 最底层的 Executor 会根据这条 SQL 处理的 Key 范围构建出多个要下发到 TiKV 的请求，并通过 distsql 的 API 将这些请求分发到 TiKV
     b. Executor.Next()：最底层的 Executor 会将 distsql 返回的数据返回给上层 Executor
-![constuct-read](/res/session3/chapter4/read-write-metrics/3.png)
+![constuct-read](res/session3/chapter4/read-write-metrics/3.png)
 
 由于这一部分涉及的监控非常多且复杂，本小节先从概览到细节对监控进行梳理：
 
@@ -241,7 +241,7 @@ Coprocessor 内部细节较多，下面进行一个简化的描述：
 所以这部分的正确分析方式是先查看整个 TSO 是否延迟过大，再查看具体是哪个阶段延迟过大。
 
 有了上面的讲解，下面用一个图来辅助理解：
-![tso](/res/session3/chapter4/read-write-metrics/4.png)
+![tso](res/session3/chapter4/read-write-metrics/4.png)
 
 注意图中标记了两种 TSO RPC Duration 的情况，因为 TSO 是异步获取的，后台线程在异步获取 TSO 过程中，处理 SQL 的线程在进行 Parse + Compile（Parse + Compile 完成后调用异步对象 tsFuture 获取真正的 TSO，所以 TSO Async Duration = Parse + Compile Duration），两种情况分别为：
 
@@ -263,7 +263,7 @@ distsql API 可以简单的认为包含一下几个重要步骤：
 
 1. Send Request 发送的过程，如下图所示
 
-![send-request](/res/session3/chapter4/read-write-metrics/5.png)
+![send-request](res/session3/chapter4/read-write-metrics/5.png)
     a. 首先根据请求中 Key 的范围在 RegionCache 找到对应的 Region，然后构造一个 copTask
     b. 根据并发配置，开启多个 copIteratorWorker goroutine
     c. 开启一个 copIteratorTaskSender goroutine 分发 copTask
@@ -272,9 +272,9 @@ distsql API 可以简单的认为包含一下几个重要步骤：
 2. Recv Response 的接口过程分为两种情况
 
     a. 不需要对发送请求的返回结果保持发送之前的顺序
-    ![unordered-request](/res/session3/chapter4/read-write-metrics/6.png)
+    ![unordered-request](res/session3/chapter4/read-write-metrics/6.png)
     b. 需要对发送请求的返回结果保持发送之前的顺序
-    ![ordered-request](/res/session3/chapter4/read-write-metrics/7.png)
+    ![ordered-request](res/session3/chapter4/read-write-metrics/7.png)
 
 
 以上是对 Send Request 和 Recv Response 的流程介绍。接下来介绍正常情况下需要关注哪些监控，查看这个过程中可能存在的异常结果，以及对应的监控。
@@ -333,7 +333,7 @@ TiDB 拿到 Key-Value 数据可能有两种格式：
 2. Get / Batch Get 返回的 Key-Value 格式
 
 对于这两种格式，Coprocessor 返回的 chunk 格式已经从 value 中把的 column 信息提取出来了，而 Get / Batch Get 返回的 Key-Value 还是按照 encode 之后的字节数组，所以需要进一步 decode，大致流程如下：
-![decode-response](/res/session3/chapter4/read-write-metrics/8.png)
+![decode-response](res/session3/chapter4/read-write-metrics/8.png)
 
 ### (5) TiDB 如何把最终数据返回给客户端的
 
@@ -370,7 +370,7 @@ TiDB 拿到 Key-Value 数据可能有两种格式：
 2. Commit
 
 在每个 Transaction 开启时会获取一个 TSO 作为 start_ts，在 Prewrite 成功后 Commit 前获取 TSO 作为 commit_ts，如下图：
-![2pc](/res/session3/chapter4/read-write-metrics/9.png)
+![2pc](res/session3/chapter4/read-write-metrics/9.png)
 
 了解以上基础认识之后，可以进一步查看这个过程中的监控信息，以及监控信息背后所代表的详细信息。
 
@@ -484,7 +484,7 @@ Scheduler 可以简单的认为是包含以下两部分的一个对象：
 ### (6) TiKV Raftstore
 
 下图展示 Raftstore 在 TiKV 体系中所处的层级，同一个 Region 在一个集群中有多个副本。Raftstore 可以理解为使用 Raft 协议使一个 Region 的 Key-Value 数据在多个 RocksDB 中的保持一致。
-![raftstore](/res/session3/chapter4/read-write-metrics/10.png)
+![raftstore](res/session3/chapter4/read-write-metrics/10.png)
 
 Raftstore 整体上来看可以分为 Write Raft Log 和 Apply Raft Log 两个部分，其中包含大量的细节，简单地从以下维度理解：
 
@@ -500,7 +500,7 @@ Raftstore 整体上来看可以分为 Write Raft Log 和 Apply Raft Log 两个�
 
 上层的写入请求会构造一个 PeerMsg::RaftCommand，里面包含写入的 Key-Value，并将 RaftCommand 通过 Router 发送到 raft 线程池，raft 线程将 Raft 日志写入到 Raft RocksDB 并同步给其他 Peer，当日志提交之后，apply 线程将数据写入 KV RocksDB，整体流程如下图所示：
 
-![write-kvdb](/res/session3/chapter4/read-write-metrics/11.png)
+![write-kvdb](res/session3/chapter4/read-write-metrics/11.png)
 
 相关的监控在 TiKV dashboard 中按照 Raft IO / Raft process / Raft messages / Raft propose 分类组织：
 

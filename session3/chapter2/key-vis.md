@@ -27,7 +27,7 @@ TiDB Dashboard 通过 Key Visualizer (KeyVis) 工具提供了一个简单，直�
 - 下方和右侧为沿热力图的每个轴的平均值
 - 左侧为表名、索引名等信息
 
-![overview](/res/session3/chapter2/keyvis/overview.png)
+![overview](res/session3/chapter2/keyvis/overview.png)
 
 ## 3. 观察某一段时间或者 Region 范围
 
@@ -91,28 +91,28 @@ TiDB Dashboard 通过 Key Visualizer (KeyVis) 工具提供了一个简单，直�
 
   这里是一个三张表的顺序写入的截图，用的 (sysbench prepare 命令)最左边我们可以看到表名为 sbtest1, sbtest2, sbtest3, 注意观察黄色（最亮的）的区块，大体上是呈现一个向上的斜线，这里的颜色亮度越高代表数据写得越多
 
-  ![sequential-write](/res/session3/chapter2/keyvis/sequential.png)
+  ![sequential-write](res/session3/chapter2/keyvis/sequential.png)
 
 - 持续热点
 
   通常如果业务有持续的热点，在 KeyVis 上也是一眼就看出来了，如下图，可以看到连续的金黄色光条，每个光条代表一段持续的热点块
 
-  ![hot](/res/session3/chapter2/keyvis/hot.png)
+  ![hot](res/session3/chapter2/keyvis/hot.png)
 
 如果我们把光标移动到金黄色的热点上还能看到更具体的提示，如下图所示，可以看到每分钟的流量为 165.25 兆字节, 访问的表名是 sbtest1， 访问的对象是表的一个索引，索引的名字是 k_1, 我们也能看到这个块在存储层对应的 key 范围，即图中展示的 start key 和 end key。
 
-![tooltip](/res/session3/chapter2/keyvis/tooltip.png)
+![tooltip](res/session3/chapter2/keyvis/tooltip.png)
 
 - 均匀分布
 
   相信聪明的同学已经猜出来了，没有明显热点就是均匀负载，有兴趣的同学可以自己动手尝试构造一个类似的负载。这种负载下数据库有完美的扩展性，随着业务的流量上升做好扩容操作即可，流量下来了直接缩容。
 
-  ![well-dist](/res/session3/chapter2/keyvis/well-dist.png)
+  ![well-dist](res/session3/chapter2/keyvis/well-dist.png)
 
 - 周期性负载
 
   系统的负载每隔一段时间会上来一次，随后又下降，如此反复，比如定时任务，整点促销，这些从图上看一目了然
 
-  ![periodic](/res/session3/chapter2/keyvis/periodic.png)
+  ![periodic](res/session3/chapter2/keyvis/periodic.png)
 
 如果大家用的是 TiDB 4.0 或者以上的版本，系统会自动根据负载情况来弹性伸缩，不再需要人工干预。弹性伸缩相关的细节请参考弹性调度章节。

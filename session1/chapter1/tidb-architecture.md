@@ -13,11 +13,11 @@ TiDB 是当今开源 NewSQL 数据库领域的代表产品之一，相比传统�
 
 TiDB 分布式数据库最初的设计受到 Google 内部开发的知名分布式数据库 Spanner 和 F1 的启发，在内核设计上将整体的架构拆分成多个大的模块，大的模块之间互相通信，组成完整的 TiDB 系统。大的架构如下：
 
-![1.png](/res/session1/chapter1/tidb-architecture/1.png)
+![1.png](res/session1/chapter1/tidb-architecture/1.png)
 
 这三个大模块相互通信，每个模块都是分布式的架构，在 TiDB 中，对应的这几个模块叫做：
 
-![2.png](/res/session1/chapter1/tidb-architecture/2.png)
+![2.png](res/session1/chapter1/tidb-architecture/2.png)
 
 1. TiDB (tidb-server, [https://github.com/pingcap/tidb](https://github.com/pingcap/tidb)): SQL 层，对外暴露 MySQL 协议的连接 endpoint，负责接受客户端的连接，执行 SQL 解析和优化，最终生成分布式执行计划。TiDB 层本身是无状态的，实践中可以启动多个 TiDB 实例，客户端的连接可以均匀的分摊在多个 TiDB 实例上以达到负载均衡的效果。tidb-server 本身并不存储数据，只是解析 SQL，将实际的数据读取请求转发给底层的存储层 TiKV。
 

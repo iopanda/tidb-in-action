@@ -28,8 +28,8 @@ Download PDF: [TiDB In Action: based on 4.0](https://raw.githubusercontent.com/p
 
 如例：
 - 文章存放路径：`session1/chapter1/tidb-intro.md` 
-- 对应图片存放目录为：`/res/session1/chapter1/tidb-intro/`
-- 图片路径对应到 markdown 里为：`![1.png](/res/session1/chapter1/tidb-intro/1.png)`
+- 对应图片存放目录为：`res/session1/chapter1/tidb-intro/`
+- 图片路径对应到 markdown 里为：`![1.png](res/session1/chapter1/tidb-intro/1.png)`
  
 
 ## TiDB in Action 写作规则

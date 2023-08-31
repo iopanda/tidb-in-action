@@ -403,7 +403,7 @@ shard_db02-schema-create.sql
 ```
 **查看上游分库分表数据已迁移到下游 merge_db 库 merge_tb 表**
 
-![图片](/res/session4/chapter5/from-sharding-to-tidb/from-sharding-tidb-1.png)
+![图片](res/session4/chapter5/from-sharding-to-tidb/from-sharding-tidb-1.png)
 
 
 ## 5.1.2.2 DM 常用管理命令

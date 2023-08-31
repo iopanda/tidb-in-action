@@ -19,12 +19,12 @@ HTAP 是 Hybrid Transactional / Analytical Processing 的缩写。这个词汇�
 ### 2. 可更新列式存储引擎 Delta Tree
 TiFlash 配备了可更新的列式存储引擎。列存更新的主流设计是 Delta Main 方式，基本思想是，由于列存块本身更新消耗大，因此往往设计上使用缓冲层容纳新写入的数据。然后再逐渐和主列存区进行合并。TiFlash 也使用了类似的 Delta Main 设计，从这个意义而言，LSM 也可用于列存更新。具体来说，Delta Tree 利用树状结构和双层 LSM 结合的方式处理更新，以规避单纯使用 LSM 设计时需要进行的多路归并。通过这种方式，TiFlash 在支持更新的同时也具备高速的读性能。
 
-![delta.jpg](/res/session1/chapter9/htap/delta.jpg)
+![delta.jpg](res/session1/chapter9/htap/delta.jpg)
 
 ### 3. 实时且一致的复制体系
 TiFlash 无缝融入整个 TiDB 的 Multi-Raft 体系。它通过 Raft Learner 进行数据复制，通过这种方式 TiFlash 的稳定性并不会对 TiKV 产生影响。例如 TiFlash 节点宕机或者网络延迟，TiKV 仍然可以继续运行无碍且不会因此产生抖动。于此同时，该复制协议允许在读时进行极轻量的校对以确保数据一致性。另外，TiFlash 可以与 TiKV 一样的方式进行在线扩容缩容，且能自动容错以及负载均衡。
 
-![raft.jpg](/res/session1/chapter9/htap/raft.jpg)
+![raft.jpg](res/session1/chapter9/htap/raft.jpg)
 
 
 ### 4. 完整的业务隔离
@@ -33,7 +33,7 @@ TiFlash 无缝融入整个 TiDB 的 Multi-Raft 体系。它通过 Raft Learner �
 #### 智能的行列混合模式
 如果不使用上述隔离模式进行查询，TiDB 也可经由优化器自主选择行列。这套选择的逻辑与选择索引类似：优化器根据统计信息估算读取数据的规模，并对比选择列存与行存访问开销，做出最优选择。通过这种模式，用户可以在同一套系统方便地同时满足不同特型的业务需求。例如一套物流系统需要同时支持点查某订单信息，也需要进行大规模聚合统计某一时间段内货物派送和分发的汇总信息，利用 TiDB 的行列混合体系可以很简单实现，且完全无需担心不同系统间数据复制带来的不一致。
 
-![rowcol.jpg](/res/session1/chapter9/htap/rowcol.jpg)
+![rowcol.jpg](res/session1/chapter9/htap/rowcol.jpg)
 
 ### 5. 更快的业务接入速度
 同时兼备行存和列存的优势，让用户能更容易地接入业务。利用传统手段，用户往往需要将在线数据导出到分析平台才能进行分析，而这中间涉及了复杂的 ETL 或者数据传输管道维护，另外不同系统之间数据如何保持一致，如何进行格式转换也是很费思量的事情。因此，整个业务接入过程往往要花费数天甚至数周。而使用 TiDB 则可以帮助你大大简化这个过程。

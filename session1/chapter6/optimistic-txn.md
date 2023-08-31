@@ -43,7 +43,7 @@ Percolator 将事务的所有状态都保存在底层支持高可用、强一致
 #### 6.1.2.3 两阶段提交过程
 事务的两阶段提交过程如下：
 
-![1.png](/res/session1/chapter6/optimistic-txn/1.png)
+![1.png](res/session1/chapter6/optimistic-txn/1.png)
 
 1. 客户端开始一个事务。
 2. TiDB 向 PD 获取 tso 作为当前事务的 start timestamp。
@@ -133,7 +133,7 @@ COMMIT;
 
 此外，TiKV 提供了监控查看具体消耗在 latch 等待的时间：
 
-![2.png](/res/session1/chapter6/optimistic-txn/2.png)
+![2.png](res/session1/chapter6/optimistic-txn/2.png)
 
 当 Scheduler latch wait duration 的值特别高时，说明大量时间消耗在等待锁的请求上。如果不存在底层写入慢的问题，基本上可以判断该段时间内冲突比较多。
 
@@ -208,7 +208,7 @@ MySQL [test]>
 
 左边事务先进行 `BEGIN`，两个窗口同时按下 `COMMIT`：
 
-![3.png](/res/session1/chapter6/optimistic-txn/3.png)
+![3.png](res/session1/chapter6/optimistic-txn/3.png)
 
 两个事务可能发生冲突但客户端并没有报错，所以要么就是串行执行没有冲突，要么就是冲突了内部 TiDB 进行重试。通过查看 `tidb.log` 日志发现 `startTs(415144181973647361)` 和 `startTs(415144181960540213)` 事务冲突，进行重试的是 `415144181973647361` (图片终端左边的事务)
 
@@ -237,7 +237,7 @@ MySQL [test]>
 #### 6.1.5.1 tikv监控--server板块
 lock 的大小应该是比较小。
 
-![4.png](/res/session1/chapter6/optimistic-txn/4.png)
+![4.png](res/session1/chapter6/optimistic-txn/4.png)
 
 #### 6.1.5.2 tidb监控-transaction板块
-![5.png](/res/session1/chapter6/optimistic-txn/5.png)
+![5.png](res/session1/chapter6/optimistic-txn/5.png)

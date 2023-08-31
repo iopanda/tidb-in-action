@@ -6,7 +6,7 @@ Mydumper + Loader 使用多线程导入导出数据时需要经过 TiDB SQL 语�
 
 TiDB Lightning 整体架构：
 
-![整体架构](/res/session2/chapter1/tidb-operator-lightning/tidb-lightning-architecture.png)
+![整体架构](res/session2/chapter1/tidb-operator-lightning/tidb-lightning-architecture.png)
 
 TiDB Lightning 主要包含两个部分：
 

@@ -140,7 +140,7 @@ TiDB 分布式数据库默认会使用很多文件描述符，工作节点和上
 
 - 重置京东云 Kubernetes 集群所有 Node 的登录密码
 
-   ![重置登录密码](/res/session2/chapter1/tidb-operator-deployment-public-jdcloud/1.png)
+   ![重置登录密码](res/session2/chapter1/tidb-operator-deployment-public-jdcloud/1.png)
 
 - 控制台登录 Node
 

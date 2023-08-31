@@ -4,7 +4,7 @@
 
 下图展示 TiDB 各个模块地图，通过这张地图可以清晰展现 TiDB 如何处理一条 SQL。
 
-![tidb performance](/res/session3/chapter4/performance-map/performance-map.png)
+![tidb performance](res/session3/chapter4/performance-map/performance-map.png)
 
 ## 1. TiDB 地图说明
 

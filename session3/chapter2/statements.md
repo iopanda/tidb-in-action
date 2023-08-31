@@ -54,7 +54,7 @@ select * from EMPLOYEE where ID in (4, 5);
 select * from employee where id in (...);
 ```
 
-![slow query table](/res/session3/chapter2/slow-query-table/1.jpg)
+![slow query table](res/session3/chapter2/slow-query-table/1.jpg)
 
 ## 4. 查看 Statements 详情
 
@@ -67,7 +67,7 @@ select * from employee where id in (...);
 3. 平均扫描行数（一般是读）
 4. 各个节点执行指标（可以快速定位出某个节点性能瓶颈）
 
-![slow query table](/res/session3/chapter2/slow-query-table/2.jpg)
+![slow query table](res/session3/chapter2/slow-query-table/2.jpg)
 
 ## 5. Statements 参数配置
 

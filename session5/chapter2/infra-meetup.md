@@ -12,5 +12,5 @@
 
 No.125 只是 Infra Meetup 新的起点，希望未来有更多对基础架构前沿技术讨论感兴趣的小伙伴，通过无论线下还是线上方式，一起加入我们。
 
-![infra-meetup.jpg](/res/session5/chapter2/events/infra-meetup.jpg)
+![infra-meetup.jpg](res/session5/chapter2/events/infra-meetup.jpg)
 

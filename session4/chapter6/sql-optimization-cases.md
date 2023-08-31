@@ -121,19 +121,19 @@ MySQL [db_stat]> explain select * from table:t_like_list where person_id='153553
 
 某个数据量 600G 左右、读多写少的 TiDB 集群，某段时间发现 TiDB 监控的 Query Summary - Duration 指标显著增加，p99 如下图。
 
-![case4_pic1.png](../../res/session4/chapter6/sql_optimization_case/case4_pic1.png)
+![case4_pic1.png](../..res/session4/chapter6/sql_optimization_case/case4_pic1.png)
 
 查看 TiDB 监控下的 KV Duration 明显升高，其中 KV Request Duration 999 by store 监控看到多个 TiKV 节点 Duration 均有上涨。
 
-![case4_pic2.png](../../res/session4/chapter6/sql_optimization_case/case4_pic2.png)
+![case4_pic2.png](../..res/session4/chapter6/sql_optimization_case/case4_pic2.png)
 
 查看 TiKV 监控 Coprocessor Overview
 
-![case4_pic3.png](../../res/session4/chapter6/sql_optimization_case/case4_pic3.png)
+![case4_pic3.png](../..res/session4/chapter6/sql_optimization_case/case4_pic3.png)
 
 查看监控 Coprocessor CPU
 
-![case4_pic4.png](../../res/session4/chapter6/sql_optimization_case/case4_pic4.png)
+![case4_pic4.png](../..res/session4/chapter6/sql_optimization_case/case4_pic4.png)
 
 发现 Coprocessor CPU 线程池几乎打满。下面开始分析日志，调查 Duration 和 Coprocessor CPU 升高的原因。
 
@@ -147,11 +147,11 @@ MySQL [db_stat]> explain select * from table:t_like_list where person_id='153553
 
 分析慢日志解析出来的 TopSQL 发现 Process keys 和 Process time 并不是线性相关，Process keys 数量多的 SQL 的 Process time 处理时间不一定更长，如下面 SQL 的 Process keys 为 22.09M，Process time 为 51s。
 
-![case4_pic5.png](../../res/session4/chapter6/sql_optimization_case/case4_pic5.png)
+![case4_pic5.png](../..res/session4/chapter6/sql_optimization_case/case4_pic5.png)
 
 下面 SQL 的 Process keys 为 12.68M，但是 Process time 高达 142353s。
 
-![case4_pic6.png](../../res/session4/chapter6/sql_optimization_case/case4_pic6.png)
+![case4_pic6.png](../..res/session4/chapter6/sql_optimization_case/case4_pic6.png)
 
 过滤 Process time 较多的 SQL，发现 3 个典型的 slow query，分析具体的执行计划。
 
@@ -160,21 +160,21 @@ MySQL [db_stat]> explain select * from table:t_like_list where person_id='153553
 select a.a_id, a.b_id,uqm.p_id from a join hsq on a.b_id=hsq.id join uqm on a.a_id=uqm.id;  
 ```
 
-![case4_pic7.png](../../res/session4/chapter6/sql_optimization_case/case4_pic7.png)
+![case4_pic7.png](../..res/session4/chapter6/sql_optimization_case/case4_pic7.png)
 
 * SQL2
 ```
 select distinct g.abc, g.def, g.ghi, h.abcd, hi.jq   from ggg g left join ggg_host gh on g.id = gh.ggg_id left join host h on gh.a_id = h.id left join a_jq hi on h.id = hi.hid   where h.abcd is not null and h.abcd  <>  '' and hi.jq is not null and hi.jq  <>  '';
 ```
 
-![case4_pic8.png](../../res/session4/chapter6/sql_optimization_case/case4_pic8.png)
+![case4_pic8.png](../..res/session4/chapter6/sql_optimization_case/case4_pic8.png)
 
 * SQL3
 ```
 select tb1.mt, tb2.name from tb2 left join tb1 on tb2.mtId=tb1.id where tb2.type=0 and (tb1.mt is not null and tb1.mt != '') and (tb2.name is not null or tb2.name != '');
 ```
 
-![case4_pic9.png](../../res/session4/chapter6/sql_optimization_case/case4_pic9.png)
+![case4_pic9.png](../..res/session4/chapter6/sql_optimization_case/case4_pic9.png)
 
 分析执行计划未发现异常，查看相关表的统计信息也都没有过期，继续分析 TiDB 和 TiKV 日志。
 
@@ -222,11 +222,11 @@ more tikv.log.2019-10-16-06\:28\:13 |grep slow-query  | grep 66625
 
 观察一段时间后确认 66625 不再是热点 region，继续处理其它热点 region。所有热点 region 处理完成后，监控 Query Summary - Duration 显著降低。
 
-![case4_pic10.png](../../res/session4/chapter6/sql_optimization_case/case4_pic10.png)
+![case4_pic10.png](../..res/session4/chapter6/sql_optimization_case/case4_pic10.png)
 
 Duration 稳定了保持一段时间，18:55 之后仍然有较高的 Duration 出现。
 
-![case4_pic11.png](../../res/session4/chapter6/sql_optimization_case/case4_pic11.png)
+![case4_pic11.png](../..res/session4/chapter6/sql_optimization_case/case4_pic11.png)
 
 观察压力较重的 tikv，移走热点 region 的 leader。
 
@@ -236,11 +236,11 @@ pd-ctl –u http://x.x.x.x:2379 operator add transfer-leader 1 2 //把 region1 
 
 leader 迁走之后，原 TiKV 节点的 Duration 立刻下降，但是迁移到新 TiKV 节点的 Duration 随之上升。
 
-![case4_pic12.png](../../res/session4/chapter6/sql_optimization_case/case4_pic12.png)
+![case4_pic12.png](../..res/session4/chapter6/sql_optimization_case/case4_pic12.png)
 
 之后多次对热点 region 进行 split 操作，最终 Duration 明显下降并恢复稳定。
 
-![case4_pic13.png](../../res/session4/chapter6/sql_optimization_case/case4_pic13.png)
+![case4_pic13.png](../..res/session4/chapter6/sql_optimization_case/case4_pic13.png)
 
 **案例总结**
 

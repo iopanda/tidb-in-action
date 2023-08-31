@@ -3,7 +3,7 @@
 ## 6.5.1 数据爆炸增长
 随着企业信息化建设工作的深入，企业数据的增长呈现爆炸性的趋势。以某个省电力公司为例，在最近几年里的用于数据存储的设备上线也呈加速增长的态势。
 
-![img](../../res/session4/chapter6/tidb-in-enterprise-practices/1.png)
+![img](../..res/session4/chapter6/tidb-in-enterprise-practices/1.png)
 
 2014 年该企业的 SAN 存储容量与 NAS 存储容量加载一起刚刚突破 1PB，到 2018 年，就已经翻了 3 倍了。从 2017 年开始，出现了更为高速增长的趋势。这些企业数据包括企业管理业务中产生的数据，面向设备采集的数据，也包括企业从外部购买的数据。这些数据大多数都存储在各种数据库系统种。在某省电力公司的已经建设了 180 多套数据库系统，用于存储各种各样的数据，而为了进一步支撑业务的开展，还需要再建设 100 多套数据库系统。这些用传统方式烟囱式建设的数据库系统带来的管理难度已经让运维部门叫苦不迭。
 
@@ -14,7 +14,7 @@
 
 经过对企业数据的现状进行梳理，我们发现目前的企业数据存储逻辑架构式这样的：
 
-![img](../../res/session4/chapter6/tidb-in-enterprise-practices/2.png__thumbnail)
+![img](../..res/session4/chapter6/tidb-in-enterprise-practices/2.png__thumbnail)
 
 
 其中结构化数据主要存储在关系型数据库中，而非结构化数据主要存储在大数据平台和对象存储中。非结构化数据的存储与处理起步较晚，因此规划基本合理，平台也比较统一。最大的问题是结构化数据，不同的业务需求与建设要求并没有在一个统一的顶层框架中考虑，因此不同规模，不同种类的数据库系统在不同的阶段被建设起来。很多数据库系统高峰期的并发访问量不超过 5 个，造成了绝大的资源浪费。另外一个极端是，有些集中式数据库系统虽然已经使用了最为豪华的硬件配置，其处理能力已经严重不足，而企业很快将面临硬件扩无可扩的窘境。
@@ -55,16 +55,16 @@
 
 在数据分级存储顶层设计原则指导下优化后的关系型应用系统，其部署架构被统一成三种模式。
 
-![img](../../res/session4/chapter6/tidb-in-enterprise-practices/3.png__thumbnail)
+![img](../..res/session4/chapter6/tidb-in-enterprise-practices/3.png__thumbnail)
 
 
 对于传统的核心业务系统，暂时无法进行云化改造的，进一步加强其系统安全性，提升高可用等级，确保核心业务稳定运行。
 
-![img](../../res/session4/chapter6/tidb-in-enterprise-practices/4.png__thumbnail)
+![img](../..res/session4/chapter6/tidb-in-enterprise-practices/4.png__thumbnail)
 
 对于重要性次一级的系统，可以采用 MySQL 或者 Oracle（尽可能选择 MySQL ），采用主从复制的方式实现高可用，这类数据库系统可以部署在云平台上，也可以部署在物理机组成的裸金属云上，由数据库运管平台统一纳管。
 
-![img](../../res/session4/chapter6/tidb-in-enterprise-practices/5.png__thumbnail)
+![img](../..res/session4/chapter6/tidb-in-enterprise-practices/5.png__thumbnail)
 
 对于泛在电力物联网应用、边缘侧三站合一数据中心应用等应用场景，采用 TiDB 分布式数据库系统，采用多租户的方式，为各类应用系统提供数据库服务。
 

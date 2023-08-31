@@ -5,7 +5,7 @@
 **增加索引流程：**
 
 
-![1.png](/res/session4/chapter8/add-index-internal.png)
+![1.png](res/session4/chapter8/add-index-internal.png)
 
 
 **增加索引核心操作:**

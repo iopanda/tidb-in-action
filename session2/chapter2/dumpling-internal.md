@@ -20,7 +20,7 @@
 
 一图胜千言，下面是 Dumpling 导出流程示意图：
 
-![dumpling flowchart](/res/session2/chapter2/dumpling/1.png)
+![dumpling flowchart](res/session2/chapter2/dumpling/1.png)
 
 如图所示，Dumpling 分为六个比较重要的部分，分别负责配置解析、数据库信息预处理、一致性控制器、Black & White 列表、写控制器及表数据中间层表示。下面详细介绍一下各个部分的工作内容：
 

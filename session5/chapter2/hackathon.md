@@ -8,11 +8,11 @@ PingCAP 作为国内一家开源的分布式数据库公司，我们一直坚信
 
 * [第一届 TiDB Hackathon](https://pingcap.com/community-cn/hackathon2018/) 于 2018 年 12 月 1 日在北京总部开启，以“TiDB Ecosystem”作为大方向，参赛者可围绕着 TiDB 及其周边生态实现自由选题，22 支参赛队伍经过两天一夜的疯狂竞技，最终 6 支队伍杀出重围，赢得大奖。短短 48 小时内，我们见证了将外部数据源以流式表的方式硬核扩展的 TiDB Batch and Streaming SQL，能让 TiDB 访问多种数据源的 CC，为开发者提供了方便查询 Region 历史的可视化工具 TiEye，All diagnosis in SQL 的 TiQuery。在这些项目中，我们惊喜于技术所带来的魅力，也看到了通过 Hackathon 而衍生出对于社区项目更多的可能性。
 
-![hackathon-2018.jpg](/res/session5/chapter2/events/hackathon-2018.jpg)
+![hackathon-2018.jpg](res/session5/chapter2/events/hackathon-2018.jpg)
 
 * [第二届 TiDB Hackathon](https://pingcap.com/community-cn/hackathon2019/) 于 2019 年 10 月 26 日重磅回归，相比去年选题更加广泛，弱化了地域限制，北上广三地联动，各路大神云集，再一次为大家线上献上了一场技术盛宴。“Improve·跃界”，跨越、爆发，所见「可提升」之处皆为竞技场。两天一夜的 Hacking Time，三地共 39 只队伍参赛，长达 7 小时精彩的 Demo Show 直播，大家都为 TiDB 性能、易用性、稳定性、功能及周边工具献出无数的好点子，用社区的力量为 TiDB 装上更多的“大杀器”：技术小白的你，也能在浏览器里直接运行数据库；程序员的你，即使呼呼大睡，机器人也能帮你找 bug；资深用户的你，也可以像使用单机数据库一样使用 TiDB，虽然叫大杀器，但这些特性似乎还有些可爱和温柔~
 
-![hackathon-2019.jpg](/res/session5/chapter2/events/hackathon-2019.jpg)
+![hackathon-2019.jpg](res/session5/chapter2/events/hackathon-2019.jpg)
 
 #### 3. 展望
 TiDB 社区有一个信念：我们从来不给自己设限，突破&提升才是一直追求的常态。对于社区、对于产品，我们想看到的从来不是一道简简单单的填空题，而希望把它变成选择题、简答题甚至一道作文题。在众多面向社区的重要活动中，TiDB Hackathon 是一个两岁的孩子，从第一次见面看到他初成长的潜力，到第二次重逢看到他富有多样性、包容性的样子带给我们的惊喜。而这一切，跟来自每一位社区的小伙伴是分不开的。

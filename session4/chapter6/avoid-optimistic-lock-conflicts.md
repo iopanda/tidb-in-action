@@ -78,7 +78,7 @@ scheduler-concurrency  scheduler 内置一个内存锁机制，防止同时对�
 
 此外，TiKV 提供了监控查看具体消耗在 latch 等待的时间：
 
-![图片](../../res/session4/chapter6/avoid-optimistic-lock-conflicts/latch_wait_duration.png)
+![图片](../..res/session4/chapter6/avoid-optimistic-lock-conflicts/latch_wait_duration.png)
 
 如果发现这个 wait duration 特别高，说明耗在等待锁的请求上比较久，如果不存在底层写入慢问题的话，基本上可以判断这段时间内冲突比较多。
 
@@ -112,7 +112,7 @@ scheduler-concurrency  scheduler 内置一个内存锁机制，防止同时对�
 
 我们来详细分析以下这个 case:
 
-![图片](../../res/session4/chapter6/avoid-optimistic-lock-conflicts/transaction_retry.png)
+![图片](../..res/session4/chapter6/avoid-optimistic-lock-conflicts/transaction_retry.png)
 
 * 如图，在session B 在 t2 开始事务 2，t5 提交成功。session A 的事务 1 在事务 2 之前开始，在事务2 提交完成后提交。
 * 事务 1、事务 2 会同时去更新同一行数据。

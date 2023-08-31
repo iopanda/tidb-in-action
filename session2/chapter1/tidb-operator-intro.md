@@ -22,7 +22,7 @@ TiDB Operator 像“牧羊人”一样，持续的监督并管理着 TiDB 各组
 
 ### 1.2.1.3 TiDB Operator 架构
 
-![TiDB Operator 架构](/res/session2/chapter1/tidb-operator-overview.png)
+![TiDB Operator 架构](res/session2/chapter1/tidb-operator-overview.png)
 
 ### 1.2.1.4 TiDB Operator 组件
 
@@ -50,7 +50,7 @@ TiDB Operator 像“牧羊人”一样，持续的监督并管理着 TiDB 各组
 
 ### 1.2.1.7 原理浅析
 
-![TiDB-Operator-control-flow](/res/session2/chapter1/tidb-operator-control-flow.png)
+![TiDB-Operator-control-flow](res/session2/chapter1/tidb-operator-control-flow.png)
 
 TiDB Operator 中使用 Helm Chart 封装了 TiDB 集群定义。整体的控制流程如下：
 

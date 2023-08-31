@@ -14,7 +14,7 @@
 
 下图为在线迁移数据库的基本流程，供读者对整体流程有个大致的认识：
 
-![图片](./../../res/session4/chapter5/from-sqlserver-to-tidb/1.png)
+![图片](./../..res/session4/chapter5/from-sqlserver-to-tidb/1.png)
 
 执行过程中，可根据实际情况，结合如下表格制定迁移操作手册：
 

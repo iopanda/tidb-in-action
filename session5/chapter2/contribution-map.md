@@ -13,11 +13,11 @@ TiDB 是一个开源的分布式数据库，目前（2020.3.7）在 GitHub 上�
 
 下面我们来看下 Contribution Map 的大概结构。开头部分是各个项目的索引，包含了各个项目的简单说明，比如 TiDB 是一个开源的兼容 MySQL 协议的分布式 HTAP 数据库，TiKV 是分布式的事务 KV 数据库等等。
 
-![1.png](/res/session5/chapter2/contribution-map/1.png)
+![1.png](res/session5/chapter2/contribution-map/1.png)
 
 接下来就是每个项目各个模块更详细的介绍，主要分为 6 部分：模块描述；代码位置；如果想要在该模块进行贡献需要具备哪些技能；相关的学习资料；该模块的任务列表；贡献指南。下图展示的是 TiKV 项目各个模块的描述代码位置等：
 
-![2.png](/res/session5/chapter2/contribution-map/2.png)
-![3.png](/res/session5/chapter2/contribution-map/3.png)
+![2.png](res/session5/chapter2/contribution-map/2.png)
+![3.png](res/session5/chapter2/contribution-map/3.png)
 
 [Contribution Map](https://github.com/pingcap/tidb-map/blob/master/maps/contribution-map.md) 仍然在持续完善中，会将越来越多的相关内容包含进来，希望能帮助到更多的 contributors。

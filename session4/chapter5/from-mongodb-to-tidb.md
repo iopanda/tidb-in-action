@@ -24,7 +24,7 @@ MongoDB 具有诸如高效字段维护，自动故障转移等优秀特性，这
 
 业务的读请求通过 Proxy 访问 TiDB 集群，首先判断 Redis Cluster 是否 `key-value` 存在，如果有则从 Redis 返回，否则读取 TiDB 集群。对于复杂计算 SQL，例如聚合函数计算、分组查询等，业务可以直接将缓存失效，在 TiDB 集群做计算；另外 Spark 集群提供的高频的实时查询业务会在第一层缓存中，实时扫描 `Big Key` 和 `Hot  Key`。主要基于 Redis `LFU` 功能，如果访问某个 `key-value` 大于 5 万次，则将该 `key-value` 通过程序植入基于 Spark 集群，当然有大概 3～5 分钟过期时间，这里可以根据业务的读请求的热点情况。另外如果访问都是一次，可以读取 TiDB，然后结果缓存到 Redis Cluster。
 
-![TiDB完整架构](/res/session4/chapter5/from-mongodb-to-tidb/1.png)
+![TiDB完整架构](res/session4/chapter5/from-mongodb-to-tidb/1.png)
 
 上文描述中，可以发现在架构中是没有引入数据库中间件处理业务请求，是因为数据库中间件成本可能会略高于这个架构，当然这也主要跟业务有关。这套架构中，业务会通过查询 Redis 和 TiDB 中的业务数据，来验证数据一致性，这也使架构变得复杂。另外业内还有其他方式解决数据一致性问题，比如通过 `sleep` 和设置延迟时间来保证读写数据的一致性。
 
@@ -60,7 +60,7 @@ MongoDB 具有诸如高效字段维护，自动故障转移等优秀特性，这
 
 迁移方案如图所示，MongoDB 数据通过一套 java 开发的程序来完成全量数据的同步，将一致性校验数据写入 Redis Cluster 中进行全量数据完整性校验。增量同步的数据通过 MongoDB 集群的 Change Stream 同步到 Kafka ，最后数据写入到 TiDB 集群中，并进行一致性校验。同步完成后，会将业务读请求切换到 TiDB 集群，TiDB 集群通过 TiDB-binlog 到 Kafka 方式，将业务的增量数据同步回 MongoDB 集群进行一致性校验。此时 TiDB 集群支持读写，MongoDB 集群只支持写入。运维过程中，需要通过查询业务情况、集群状态来监控 TiDB 集群和 MongoDB 集群可用性和状态，如果 TiDB 出现故障，MongoDB 可以作为备库提供服务，管理人员通过手动或者自动程序，将业务请求切换到 MongoDB。下文会有具体的实施方案。
 
-![迁移方案](/res/session4/chapter5/from-mongodb-to-tidb/2.png)
+![迁移方案](res/session4/chapter5/from-mongodb-to-tidb/2.png)
 
 > **注意**
 >
@@ -70,7 +70,7 @@ MongoDB 具有诸如高效字段维护，自动故障转移等优秀特性，这
 
 如图所示，迁移流程主要是 6 个主要部分，我们来分别介绍以下详细的迁移流程。
 
-![迁移流程](/res/session4/chapter5/from-mongodb-to-tidb/4.png)
+![迁移流程](res/session4/chapter5/from-mongodb-to-tidb/4.png)
 
 ##### (1) 通过代码实现异构迁移的双写
 
@@ -80,7 +80,7 @@ MongoDB 具有诸如高效字段维护，自动故障转移等优秀特性，这
 
 第一次拉取全量数据，假设以数据维度分片的异构迁移程序的服务，要服务每开启 20 个线程，每个线程读取迁移的数据，并会记录迁移的 `uid` 到 Redis Cluster，目的是为了线程终止后，不用全量恢复数据，实现断点续传；另外设置 Redis 的 log 检查迁移数据情况、慢查询、错误信息等输出。
 
-![日志信息](/res/session4/chapter5/from-mongodb-to-tidb/3.png)
+![日志信息](res/session4/chapter5/from-mongodb-to-tidb/3.png)
 
 ##### (3) 开始增量迁移
 
@@ -104,7 +104,7 @@ MongoDB 具有诸如高效字段维护，自动故障转移等优秀特性，这
 
 使用 MongoDB 的 `Change Stream` 根据时间拉取数据到 Kafka，同步到 TiDB 集群。同时 Redis 也会记录以 `uid` 的数据维度的迁移范围数据，可以通过校验 Kafka 的 `uid` 和 Redis 的 `uid` 进行比对是否一致。
 
-![日志截图](/res/session4/chapter5/from-mongodb-to-tidb/5.png)
+![日志截图](res/session4/chapter5/from-mongodb-to-tidb/5.png)
 
 #### 2. MongoDB metadata 的一致性验证
 
@@ -122,11 +122,11 @@ MongoDB 具有诸如高效字段维护，自动故障转移等优秀特性，这
 
 如下图所示，运维平台最好有一套服务配置中心系统，可主动的定时拉取、发布订阅，可编辑、离线缓存配置文件等等功能。从流程图中，可以看到正常的业务读写请求会在 TiDB 集群，TiDB 集群会通过 TiDB-binlog 的下游 Kafka 模式将数据同步到 MongoDB 的集群，此时 MongoDB 作为备库在整个架构里。
 
-![切换前](/res/session4/chapter5/from-mongodb-to-tidb/6.png)
+![切换前](res/session4/chapter5/from-mongodb-to-tidb/6.png)
 
 如当遇到 TiDB 集群业务不可以访问的情况的突发情况，需要通过人为手段恢复。通过手动变更配置信息，通过服务配置中心系统生效配置请求处理，将 Web Service 请求全部切换到 MongoDB，同时 MongoDB 会通过 Change Stream，下游配置 Kafka 模式将增量数据同步回 TiDB 集群。
 
-![切换后](/res/session4/chapter5/from-mongodb-to-tidb/7.png)
+![切换后](res/session4/chapter5/from-mongodb-to-tidb/7.png)
 
 2. 降级处理流程的触发器设计
 
@@ -147,7 +147,7 @@ circuitBreaker.sleepWindowInMilliseconds：//过多长时间，熔断器再次�
 
 这个机制相比直接挂掉业务要好一些，但也要看业务场景。接下来业务隔离重试，运维同学要通过配置中心系统内置查询 MongoDB 和 TiDB 的开关，将 TiDB 手动切换 MongoDB 查询。切换后，因为还有增量数据同步到 TiDB 集群，可以通过 Kafka 监控来确认数据同步的延迟情况。
 
-![kafka监控](/res/session4/chapter5/from-mongodb-to-tidb/8.png)
+![kafka监控](res/session4/chapter5/from-mongodb-to-tidb/8.png)
 
 ### 5.7.7 迁移后的 SQL 优化
 
@@ -155,11 +155,11 @@ MongoDB 的查询也基本都是单表，通过走索引方式查询。针对每
 
 - 优化前
 
-![优化前](/res/session4/chapter5/from-mongodb-to-tidb/9.png)
+![优化前](res/session4/chapter5/from-mongodb-to-tidb/9.png)
 
 - 优化后
 
-![优化后](/res/session4/chapter5/from-mongodb-to-tidb/10.png)
+![优化后](res/session4/chapter5/from-mongodb-to-tidb/10.png)
 
 ### 5.7.8 总结
 

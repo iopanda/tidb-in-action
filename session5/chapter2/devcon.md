@@ -8,8 +8,8 @@ TiDB DevCon 是 PingCAP 团队面向 TiDB 社区推出的年度最高规格的�
 
 [TiDB DevCon 2019](https://pingcap.com/community-cn/devcon2019/) 于 2019 年 01 月 19 日在北京举办，出席人数 750+，社区讲师来自：美团、小米、转转、新浪微博、VIPKID、贝壳找房、Bilibili、新东方、北京银行、微众银行、中证券 等。
 
-![devcon-1.png](/res/session5/chapter2/events/devcon-1.png)
+![devcon-1.png](res/session5/chapter2/events/devcon-1.png)
 
 [TiDB DevCon 2018](https://pingcap.com/community-cn/devcon2018/) 于 2018 年 01 月 20 日在北京举办，出席人数 300+，社区讲师来自：今日头条、Mobike、饿了么、去哪儿 等，参见 。
 
-![devcon-2.png](/res/session5/chapter2/events/devcon-2.png)
+![devcon-2.png](res/session5/chapter2/events/devcon-2.png)

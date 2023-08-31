@@ -575,7 +575,7 @@ ADD TRANDATA schema.tablename NOKEY
 
 ### 1. OGG 基本配置图
 
-![OGG 基本配置图](/res/session4/chapter5/from-oracle-to-tidb/1.png)
+![OGG 基本配置图](res/session4/chapter5/from-oracle-to-tidb/1.png)
 
 基本配置中，主要是两套进程：
 
@@ -601,7 +601,7 @@ ADD TRANDATA schema.tablename NOKEY
 
 Extract 和 pump 进程架构图
 
-![Extract 和 pump 进程架构图](/res/session4/chapter5/from-oracle-to-tidb/2.png)
+![Extract 和 pump 进程架构图](res/session4/chapter5/from-oracle-to-tidb/2.png)
 
 上图只是通过 Extract 进程增量捕获源端数据库 redo 和 archive log 的变化，然后通过 Data pump 进程将变化的日志投递到远端服务器
 
@@ -842,7 +842,7 @@ add replicat rnit_ora,specialrun
 
 ### 5. 进程启动顺序
 
-![进程启动顺序](/res/session4/chapter5/from-oracle-to-tidb/3.png)
+![进程启动顺序](res/session4/chapter5/from-oracle-to-tidb/3.png)
 
 如上图，配置表的全量及增量的完成时间流程图：
 

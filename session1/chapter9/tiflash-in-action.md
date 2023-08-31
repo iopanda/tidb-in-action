@@ -37,7 +37,7 @@ TiDB 提供三种读取 TiFlash 副本的方式。如果添加了 TiFlash 副本
 
 #### 1. CBO
 对于创建了 TiFlash 副本的表，TiDB 的 CBO 优化器会自动根据代价选择是否使用 TiFlash 副本，具体有没有选择 TiFlash 副本，可以通过 `explain analyze` 语句查看，见下图：
-![1.png](/res/session1/chapter9/tiflash-in-action/1.png)
+![1.png](res/session1/chapter9/tiflash-in-action/1.png)
 
 
 #### 2. Engine 隔离

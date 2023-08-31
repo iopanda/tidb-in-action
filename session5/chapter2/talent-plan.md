@@ -4,13 +4,13 @@
 
 自 2018 年 12 月份 Talent Plan 项目启动至今（北京时间 2020 年 3 月 7 日），线上课程共吸引国内外实名认证课程爱好者 **400** 余人，40 余人顺利通过线上课程的考核；线下实训项目成功举办 4 期，38 名同学顺利结业，15 名同学在通过 Talent Plan 课程考核后陆续加入 PingCAP，其他同学也持续在 TiDB Community 中发挥自己的光和热。
 
-![Talent Plan Milestones](/res/session5/chapter2/talent-plan/talent-plan-milestones.png)
+![Talent Plan Milestones](res/session5/chapter2/talent-plan/talent-plan-milestones.png)
 
 ### 2.3.1 课程内容
 
 Talent Plan 是为社区提供的学习资料，也在社区的建议和反馈中不断优化成长。在社区小伙伴的共同努力下，Talent Plan 正在进行新一轮的升级，这是一个涵盖了开源协作、Rust 语言、分布式数据库、分布式系统、TiDB/TiKV 原理精讲等线上学习课程以及 TiDB 开源社区项目线下实训课程的更大的学习版图。课程框架见下图：
 
-![Talent Plan Framework](/res/session5/chapter2/talent-plan/talent-plan-framework.jpg)
+![Talent Plan Framework](res/session5/chapter2/talent-plan/talent-plan-framework.jpg)
 
 #### 1. 线上课程
 
@@ -65,7 +65,7 @@ TinyKV 类似已有的 [Distributed Systems in Rust](https://github.com/pingcap/
 
 截止目前，线下实训已成功举办 4 期，累计线下学员数 41 人，累计覆盖 10 所高校，38 名同学顺利结业。
 
-![Talent Plan Students](/res/session5/chapter2/talent-plan/talent-plan-students.png)
+![Talent Plan Students](res/session5/chapter2/talent-plan/talent-plan-students.png)
 
 ### 2.3.2 学习路径
 

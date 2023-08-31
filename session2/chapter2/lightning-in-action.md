@@ -264,7 +264,7 @@ TiDB Lightning 启动后，可以访问 [http://127.0.0.1:8289](http://127.0.0.1
 
 ## TiDB Lightning Web 首页
 
-![1.png](/res/session2/chapter2/lightning-in-action/1.png)
+![1.png](res/session2/chapter2/lightning-in-action/1.png)
 
 标题栏上图标所对应的功能，从左到右依次为：
 
@@ -289,7 +289,7 @@ TiDB Lightning 启动后，可以访问 [http://127.0.0.1:8289](http://127.0.0.1
 
 点击标题栏的 + 图标提交任务。
 
-![2.png](/res/session2/chapter2/lightning-in-action/2.png)
+![2.png](res/session2/chapter2/lightning-in-action/2.png)
 
 任务 (task) 为 TOML 格式的文件，具体参考 [TiDB Lightning 任务配置](https://pingcap.com/docs-cn/stable/reference/tools/tidb-lightning/config#tidb-lightning-%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0)。你也可以点击 UPLOAD 上传一个本地的 TOML 文件。
 
@@ -299,7 +299,7 @@ TiDB Lightning 启动后，可以访问 [http://127.0.0.1:8289](http://127.0.0.1
 
 点击首页表格卡片上的 > 图标，查看表格导入的详细进度。
 
-![3.png](/res/session2/chapter2/lightning-in-action/3.png)
+![3.png](res/session2/chapter2/lightning-in-action/3.png)
 
 该页显示每张表的引擎文件的导入过程。
 
@@ -309,7 +309,7 @@ TiDB Lightning 启动后，可以访问 [http://127.0.0.1:8289](http://127.0.0.1
 
 单击标题栏上的 ⓘ 图标来管理当前及队列中的任务。
 
-![4.png](/res/session2/chapter2/lightning-in-action/4.png)
+![4.png](res/session2/chapter2/lightning-in-action/4.png)
 
 每个任务都是依据提交时间来标记。点击该任务将显示 JSON 格式的配置文件。
 
@@ -1051,7 +1051,7 @@ scrape_configs:
 
 ### 第一行：速度面板
 
-![5.png](/res/session2/chapter2/lightning-in-action/5.png)
+![5.png](res/session2/chapter2/lightning-in-action/5.png)
 
 | 面板名称   | 序列   | 描述   | 
 |:----|:----|:----|
@@ -1063,7 +1063,7 @@ scrape_configs:
 
 ### 第二行：进度面板
 
-![6.png](/res/session2/chapter2/lightning-in-action/6.png)
+![6.png](res/session2/chapter2/lightning-in-action/6.png)
 
 | 面板名称   | 描述   | 
 |:----|:----|
@@ -1073,7 +1073,7 @@ scrape_configs:
 
 ### 第三行：资源使用面板
 
-![7.png](/res/session2/chapter2/lightning-in-action/7.png)
+![7.png](res/session2/chapter2/lightning-in-action/7.png)
 
 | 面板名称   | 描述   | 
 |:----|:----|
@@ -1083,7 +1083,7 @@ scrape_configs:
 
 ### 第四行：配额使用面板
 
-![8.png](/res/session2/chapter2/lightning-in-action/8.png)
+![8.png](res/session2/chapter2/lightning-in-action/8.png)
 
 | 面板名称   | 序列   | 描述   | 
 |:----|:----|:----|
@@ -1097,7 +1097,7 @@ scrape_configs:
 
 ### 第五行：读取速度面板
 
-![9.png](/res/session2/chapter2/lightning-in-action/9.png)
+![9.png](res/session2/chapter2/lightning-in-action/9.png)
 
 | 面板名称   | 序列   | 描述   | 
 |:----|:----|:----|
@@ -1110,7 +1110,7 @@ scrape_configs:
 
 ### 第六行：存储空间面板
 
-![10.png](/res/session2/chapter2/lightning-in-action/10.png)
+![10.png](res/session2/chapter2/lightning-in-action/10.png)
 
 | 面板名称   | 序列   | 描述   | 
 |:----|:----|:----|
@@ -1124,7 +1124,7 @@ scrape_configs:
 
 ### 第七行：导入速度面板
 
-![11.png](/res/session2/chapter2/lightning-in-action/11.png)
+![11.png](res/session2/chapter2/lightning-in-action/11.png)
 
 | 面板名称   | 序列   | 描述   | 
 |:----|:----|:----|

@@ -4,7 +4,7 @@
 
 在社区组织架构下面，下设四个不同的组织，PMC，Developer Group，User Group 以及 Organization Committee。
 
-![1.png](/res/session5/chapter1/community-governance/1.png)
+![1.png](res/session5/chapter1/community-governance/1.png)
 
 ### 1.3.1 PMC
 
@@ -14,7 +14,7 @@ TiDB 社区的顶层治理架构我们借鉴了 Apache 基金会的 PMC(Project 
 
 Developer Group，就是大家常说的开发者社区。在开发者社区中，在大家耳熟能详的 Contributor，Committer 和 Maintainer 中，考虑到 Contributor 到 Committer 中间的升级链路太长，TiDB 社区新增了 Active Contributor 和 Reviewer 的角色，贡献者可以一步步进阶，更好地参与到项目协作和推进。
 
-![2.png](/res/session5/chapter1/community-governance/2.png)
+![2.png](res/session5/chapter1/community-governance/2.png)
 
 目前 TiDB 社区项目越来越多，本身 TiDB 和 TiKV 项目也越来越复杂，所以 TiDB 社区引入了两个新的治理概念:
 

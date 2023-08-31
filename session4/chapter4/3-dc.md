@@ -10,7 +10,7 @@ TiDB 分布式数据库两地三中心建设架构基于 Raft 算法，保证了
 * 生产集群采用 5 副本模式，其中 IDC1 和 IDC2 分别放 2 个副本，IDC3 放 1 个副本；TiKV 按机柜打 Label，既每个机柜上有一份副本。
 * 从集群与主机群直接通过 TiDB-Binlog 完成数据同步工作。
 
-![P1.md](/res/session4/chapter4/3-dc/p1.png)
+![P1.md](res/session4/chapter4/3-dc/p1.png)
 <p align="center">图 1  两地三中心集群架构图</p>
 
 该架构具备高可用和容灾备份能力，同时通过 PD 调度限制了 region leader 尽量只出现在同城的两个数据中心，这相比于三数据中心 region leader 分布不受限制的方案优势如下：
@@ -23,7 +23,7 @@ TiDB 分布式数据库两地三中心建设架构基于 Raft 算法，保证了
 ## 1.2 部署说明
 下面具体介绍两地三中心架构部署详情。
 
-![P2.md](/res/session4/chapter4/3-dc/p2.png)
+![P2.md](res/session4/chapter4/3-dc/p2.png)
 <p align="center">图2 两地三中心配置详图</p>
 
 北京、西安两地三中心配置详解：
@@ -185,7 +185,7 @@ location_labels = ["dc","rack","zone","host"]
 ## 2.3 Labels 设计
 在两地三中心部署方式下，对于 Labels 的设计也需要充分考虑到系统的可用性和容灾能力，建议根据部署的物理结构来定义 DC、AZ、RACK、HOST 四个等级。
 
-![P3.md](/res/session4/chapter4/3-dc/p3.png)
+![P3.md](res/session4/chapter4/3-dc/p3.png)
 <p align="center">图3 label逻辑定义图</p>
 
 

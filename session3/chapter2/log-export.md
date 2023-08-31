@@ -19,7 +19,7 @@
 
 点击「日志搜索」按钮后，会进入下面详情页面，如下图：
 
-![](/res/session3/chapter2/log-export/1.jpg)
+![](res/session3/chapter2/log-export/1.jpg)
 
 ## 2. 日志搜索进度
 
@@ -47,7 +47,7 @@
 - 组件类型：显示组件名称，目前主要有 TiDB、TiKV、PD
 - 日志：每条日志记录的正文部分，不包含日志的时间和日志等级。过长的日志，会自动截断，鼠标悬停可以查看完整的日志，完整日志最长显示 512 个字符。如下图：
 
-![](/res/session3/chapter2/log-export/2.jpg)
+![](res/session3/chapter2/log-export/2.jpg)
 
 ## 4. 日志导出功能
 
@@ -55,7 +55,7 @@
 
 点击「下载选中日志」按钮，自动下载日志压缩包到本地，供用户分析查看，如下图：
 
-![](/res/session3/chapter2/log-export/3.jpg)
+![](res/session3/chapter2/log-export/3.jpg)
 
 - 当选择一个组件时会返回 zip 文件，解压得到 log 文本文件
 - 当选择多个组件时会返回 tar 文件，解压得到多个 zip 文件，解压 zip 得到 log 文本文件

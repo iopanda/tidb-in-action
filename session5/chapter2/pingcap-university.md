@@ -15,7 +15,7 @@ PingCAP 讲师团队均来自 PingCAP 官方的资深解决方案架构师、核
 
 TiDB DBA 认证项目自 2018 年 10 月启动、2019 年 1 月正式落地，得到了社区伙伴的广泛响应。截止 2020 年 3 月 7 日，线上课程每月有来自国内外的 2000 余人观看，线下实训项目成功举办 11 期，400 余同学顺利毕业，数十名同学通过 PCTA 、PCTP 认证考试，这批应用 TiDB 的核心人才正服务于各行各业。
 
-![TiDB DBA Certified Program Milestones](/res/session5/chapter2/pingcap-university/tidb-dba-certified-program-milestones.png)
+![TiDB DBA Certified Program Milestones](res/session5/chapter2/pingcap-university/tidb-dba-certified-program-milestones.png)
 
 
 #### 2. 课程亮点
@@ -43,7 +43,7 @@ PCTA 基础认证注重实践，PCTP 进阶认证注重深度原理，严格的�
 
 TiDB DBA 认证项目 2.0 课程框架见下图：
 
-![TiDB DBA Courses Framework](/res/session5/chapter2/pingcap-university/tidb-dba-courses-framework.png)  
+![TiDB DBA Courses Framework](res/session5/chapter2/pingcap-university/tidb-dba-courses-framework.png)  
 
 #### 1. 线上课程
 
@@ -67,7 +67,7 @@ PingCAP University TiDB DBA 认证项目 [官方网校](https://university.pingc
 > * 课程形式方面，线上学习灵活，线下学习高效，可以根据自己的时间安排选择。官方在 B 站也有定期的分享视频。课程内容方面，分类详细，学习安排紧凑，可以全方位深入了解 TiDB 的设计和使用理念。——张同学，某知名弹幕网站
 > * PingCAP University 的课程优点：课程视频丰富，文档丰富详细。个人学习过程中也感到稍有不足，比如部分视频过长，不精练，需要很长时间才能看完。——刘同学，某知名本地信息网站
 
-![TiDB DBA Students](/res/session5/chapter2/pingcap-university/tidb-dba-students.png)
+![TiDB DBA Students](res/session5/chapter2/pingcap-university/tidb-dba-students.png)
 
 ### 2.6.3 TiDB DBA 认证考试
 

@@ -14,13 +14,13 @@
 
 如下图：
 
-![](/res/session3/chapter2/profiling/1.jpg)
+![](res/session3/chapter2/profiling/1.jpg)
 
 ## 2. 查看性能分析状态
 
 开始性能分析后，页面将以 1 秒为周期更新显示性能分析的进度，如下图：
 
-![](/res/session3/chapter2/profiling/2.jpg)
+![](res/session3/chapter2/profiling/2.jpg)
 
 > 注意：
 > 
@@ -32,11 +32,11 @@
 
 - TiDB Profile 图可以清楚的分析每个函数执行的时间
 
-![](/res/session3/chapter2/profiling/tidb.jpg)
+![](res/session3/chapter2/profiling/tidb.jpg)
 
 - TiKV 火焰图可以分析出 CPU 资源消耗情况
 
-![](/res/session3/chapter2/profiling/tikv.jpg)
+![](res/session3/chapter2/profiling/tikv.jpg)
 
 
 综上所述，TiDB 4.0 实现了对各个组件的 CPU 性能分析功能，帮助 TiDB 用户直观的了解组件性能情况，及时准备优化方案。

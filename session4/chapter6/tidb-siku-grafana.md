@@ -6,7 +6,7 @@ TiDB 作为一款 HTAP 数据库，具备海量数据存储的能力，非常适
 
 Grafana 是一个跨平台的开源的度量分析和可视化工具，可使用内置的 MySQL 的插件连接 TiDB 数据库。
 
-![Alt](../../res/session4/chapter6/tidb-siku-grafana/1.png__original)
+![Alt](../..res/session4/chapter6/tidb-siku-grafana/1.png__original)
 **图 1**
 
 如图 1 所示为 Grafana 面板的设计界面。通过该界面可以通过 SQL 的方式，将数据通过 Grafana  组件进行展示，用于大数据的可视化展现。
@@ -30,7 +30,7 @@ Grafana 是一个跨平台的开源的度量分析和可视化工具，可使用
 #### 6.7.2.1. 多维报表的 Schema 定义
 
 按照 Saiku 定义 Schema 的通用规则，可以直接定义跑在 TiDB 上的 Schema 。无需特殊处理。同时可以充分发挥在大数据下的多表关联优势，降低存储和数据维护成本，对关系型数据库常用的星星模型有比较好的支撑。定义的 Schema 实例如下
-![Alt](../../res/session4/chapter6/tidb-siku-grafana/2.png__original)
+![Alt](../..res/session4/chapter6/tidb-siku-grafana/2.png__original)
 **图 2**
      
 如上图是一个星星模型的 Schema ,维表 kms_dt 通过主键 tday 和主表的 bizdate 进行关联构成星星模型.
@@ -49,14 +49,14 @@ Grafana 是一个跨平台的开源的度量分析和可视化工具，可使用
         由于 TiDB 与 MySQL 良好的集成性，可以直接使用 MySQL 的驱动 jdbc Driver:com.mysql.jdbc.Drive
  账户和密码：
        TiDB 的数据库访问密码
-![Alt](../../res/session4/chapter6/tidb-siku-grafana/3.png__original)
+![Alt](../..res/session4/chapter6/tidb-siku-grafana/3.png__original)
 **图 3**
 
 #### 2.3 多维报表的运行
 
  在 Saiku 界面新建对应多维分析报表分析,在选择多维数据中找到需要定义的数据源,定义上对应的指标和维度作为默认的多维分析界面.分析人员可以根据需求指定自己的私有报表分析。定义完成的报表后通过报表管理界面直接运行，并进行交互式的分析。 运行界面实例如下：
  
-   ![Alt](../../res/session4/chapter6/tidb-siku-grafana/4.png__original)
+   ![Alt](../..res/session4/chapter6/tidb-siku-grafana/4.png__original)
 **图 4**
 
       注意：

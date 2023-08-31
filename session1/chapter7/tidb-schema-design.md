@@ -8,7 +8,7 @@
 
 TiDB 以 Region 为单位对数据进行切分，每个 Region 有大小限制（默认为 96MB）。Region 的切分方式是范围切分。每个 Region 会有多个副本，每一组副本，称为一个 Raft Group。每个 Raft Group 中由 Leader 负责执行这块数据的读和写（TiDB 即将支持 [Follower-Read](https://zhuanlan.zhihu.com/p/78164196)）。Leader 会自动地被 PD 组件均匀调度在不同的物理节点上，以均分读写压力。
 
-![tidb-data-overview.png](/res/session1/chapter7/tidb-schema-design/tidb-data-overview.png)
+![tidb-data-overview.png](res/session1/chapter7/tidb-schema-design/tidb-data-overview.png)
 
 每个表对应了多个 Region，一个 Region 只会对应一个表，每一个 Region 里是一组有序的数据库记录。这一块不太了解的请阅读下 TIDB 经典文章：[谈存储](https://pingcap.com/blog-cn/tidb-internal-1/)、[谈调度](https://pingcap.com/blog-cn/tidb-internal-3/)，这里篇幅原因不再进行详细说明。
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS TEST_HOTSPOT(
 [CommonPrefix + TableID, CommonPrefix + TableID + 1)
 ```
 对于在短时间内的大量写入，它会持续写入到同一个 Region。
-![tidb-split-region.png](/res/session1/chapter7/tidb-schema-design/tidb-split-region.png)
+![tidb-split-region.png](res/session1/chapter7/tidb-schema-design/tidb-split-region.png)
 
 上图简单描述了这个过程，持续写入，TiKV 会将 Region 切分。但是由于是由原 Leader 所在的 Store 首先发起选举，所以大概率下旧的 Store 会成为新切分好的两个 Region 的 Leader。对于新切分好的 Region 2，3。也会重复之前发生在 Region 1 上的事情。也就是压力会密集地集中在 TiKV-Node 1 中。
 

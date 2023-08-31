@@ -20,7 +20,7 @@ Prometheus 可以监控的对象远不止官方 exporters 列表中的产品，�
 
 Prometheus 的架构图如下：
 
-![1.png](/res/session3/chapter4/prometheus/1.png)
+![1.png](res/session3/chapter4/prometheus/1.png)
 
 Prometheus 生态中 prometheus server 软件用于监控信息的存储、检索，以及告警消息的推送，是 Prometheus 生态最核心的部分。
 
@@ -124,7 +124,7 @@ groups:
 
 TiDB 已经原生支持 Prometheus，在 2.1 之前的版本，TiDB 的监控信息是由各 TiDB 的各个组件主动上报给 pushgateway，再由 prometheus server 去 pushgateway 上主动抓取监控信息。从 2.1 版本开始，TiDB 暴露 [Metrics 接口](https://pingcap.com/docs-cn/stable/how-to/monitor/monitor-a-cluster/#%E4%BD%BF%E7%94%A8-metrics-%E6%8E%A5%E5%8F%A3) ，由 prometheus server 主动抓取信息，这样的架构更符合 Prometheus 的设计思想，整个数据采集路径少了一层 pushgateway。数据采集完成后由 grafana 做报表展示，同时告警信息主动推送给 alertmanager，再由 altermanager 将告警推送到不同的消息渠道。
 
-![2.png](/res/session3/chapter4/prometheus/2.png)
+![2.png](res/session3/chapter4/prometheus/2.png)
 
 ### 2. 通过 Prometheus PromQL 语言查看 TiDB 的监控 
 
@@ -143,7 +143,7 @@ Promethes 中的数据类型分 4 类：
 
 下图是在 web UI ([http://prometheus-server:9090/graph)](http://prometheus-server:9090/graph) 上执行 up{instance="21.129.14.103:2998"} 表达式查询到的某个实例的存活状态。
 
-![3.png](/res/session3/chapter4/prometheus/3.png)
+![3.png](res/session3/chapter4/prometheus/3.png)
 
 (3) 结果中各个字段的意义：
 
@@ -175,7 +175,7 @@ Range vector 查询类似于 instance vector 查询，不同之处在于通过 [
 
 下面看看监控 TiDB QPS 的例子，展示的是 172.16.4.51:10080 这台 TiDB 实例的 QPS 情况：
 
-![4.png](/res/session3/chapter4/prometheus/4.png)
+![4.png](res/session3/chapter4/prometheus/4.png)
 
 ### 5. offset 查询
 
@@ -191,19 +191,19 @@ sum((tidb_server_query_total{result="OK"}  offset 1d))
 
 这两个函数一般作用于计数器 counter 类型的数据，这类数据会一直增加，使用这两个函数后，展示的是一定时间范围内的变化情况。但它俩的计算方式是有差异，irate() 是基于时间范围内连续的两个时间点，而 rate() 是基于时间范围内的所有时间点，所以 irate() 展示的数据更为精确些，做图毛刺也会更明显。下图展示的是 TiDB 集群中节点的 CPU 使用率的监控，对应的表达式是 rate(process_cpu_seconds_total{job="tidb"}[1m])。
 
-![5.png](/res/session3/chapter4/prometheus/5.png)
+![5.png](res/session3/chapter4/prometheus/5.png)
 
 **sum 和 avg**
 
 sum 是求和函数，avg 是求均值函数。表达式 sum(tikv_store_size_bytes{instance=~"$instance"}) by (instance) 查询的是各个 TiKV 实例的容量总和。
 
-![6.png](/res/session3/chapter4/prometheus/6.png)
+![6.png](res/session3/chapter4/prometheus/6.png)
 
 **increase**
 
 increase 函数计算的是指定时间范围内的变化量，例如表达式 sum(increase(tidb_server_execute_error_total[1m])) by (type) 是以 type 为聚合条件，显示 1 分钟内 Failed Query OPM 总数
 
-![7.png](/res/session3/chapter4/prometheus/7.png)
+![7.png](res/session3/chapter4/prometheus/7.png)
 
 **histogram_quantile**
 
@@ -211,7 +211,7 @@ histogram_quantile 是累积直方图百分位函数，用法 histogram_quantile
 
 histogram_quantile(0.99, sum(rate(tidb_server_handle_query_duration_seconds_bucket[1m])) by (le, instance))
 
-![8.png](/res/session3/chapter4/prometheus/8.png)
+![8.png](res/session3/chapter4/prometheus/8.png)
 
 ### 4.4.6 通过配置 alertmanager 对 TiDB 故障进行报警
 
