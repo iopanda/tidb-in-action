@@ -34,7 +34,7 @@ Raft 提供几个重要的功能：
 
 TiKV 利用 Raft 来做数据复制，每个数据变更都会落地为一条 Raft 日志，通过 Raft 的日志复制功能，将数据安全可靠地同步到复制组的每一个节点中。不过在实际写入中，根据 Raft 的协议，只需要同步复制到多数节点，即可安全地认为数据写入成功。
 
-![1.png](/res/session1/chapter2/tidb-storage/1.png)
+![1.png](res/session1/chapter2/tidb-storage/1.png)
 
 总结一下，通过单机的 RocksDB，TiKV 可以将数据快速地存储在磁盘上；通过 Raft，将数据复制到多台机器上，以防单机失效。数据的写入是通过 Raft 这一层的接口写入，而不是直接写 RocksDB。通过实现 Raft，TiKV 变成了一个分布式的 Key-Value 存储，少数几台机器宕机也能通过原生的 Raft 协议自动把副本补全，可以做到对业务无感知。
 
@@ -49,7 +49,7 @@ TiKV 利用 Raft 来做数据复制，每个数据变更都会落地为一条 Ra
 
 TiKV 选择了第二种方式，将整个 Key-Value 空间分成很多段，每一段是一系列连续的 Key，将每一段叫做一个 Region，并且会尽量保持每个 Region 中保存的数据不超过一定的大小，目前在 TiKV 中默认是 96MB。每一个 Region 都可以用 [StartKey，EndKey) 这样一个左闭右开区间来描述。
 
-![2.png](/res/session1/chapter2/tidb-storage/2.png)
+![2.png](res/session1/chapter2/tidb-storage/2.png)
 
 注意，这里的 Region 还是和 SQL 中的表没什么关系！ 请各位继续忘记 SQL，只谈 KV。
 将数据划分成 Region 后，TiKV 将会做两件重要的事情：
@@ -63,7 +63,7 @@ TiKV 选择了第二种方式，将整个 Key-Value 空间分成很多段，每�
 对于第二点，TiKV 是以 Region 为单位做数据的复制，也就是一个 Region 的数据会保存多个副本，TiKV 将每一个副本叫做一个 Replica。Replica 之间是通过 Raft 来保持数据的一致，一个 Region 的多个 Replica 会保存在不同的节点上，构成一个 Raft Group。其中一个 Replica 会作为这个 Group 的 Leader，其他的 Replica 作为 Follower。所有的读和写都是通过 Leader 进行，读操作在 Leader 上即可完成，而写操作再由 Leader 复制给 Follower。
 大家理解了 Region 之后，应该可以理解下面这张图：
 
-![3.png](/res/session1/chapter2/tidb-storage/3.png)
+![3.png](res/session1/chapter2/tidb-storage/3.png)
 
 以 Region 为单位做数据的分散和复制，就有了一个分布式的具备一定容灾能力的 KeyValue 系统，不用再担心数据存不下，或者是磁盘故障丢失数据的问题。
 
